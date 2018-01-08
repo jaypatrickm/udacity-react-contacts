@@ -5,7 +5,7 @@ import * as ContactsAPI from './utils/ContactsAPI'
 
 class App extends Component {
   state = {
-    screen: 'create', //list, create
+    screen: 'list', //list, create
     contacts : []
   }
 
@@ -28,8 +28,12 @@ class App extends Component {
       <div>
       {this.state.screen === 'list' && (
         <ListContacts 
+          contacts={this.state.contacts} 
           onDeleteContact={this.removeContact} 
-          contacts={this.state.contacts} />
+          onNavigate={() => {
+            this.setState({ screen: 'create'})
+          }}
+          />
         )}
       {this.state.screen === 'create' && (
          <CreateContact />
